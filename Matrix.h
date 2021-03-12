@@ -32,6 +32,9 @@ public:
     }
     void blockEncode();
     void blockDecode();
+    vector<vector<int>>getMatrixOrigin(){
+        return matrix;
+    }
 };
 
 void Matrix::blockEncode(){
