@@ -11,6 +11,7 @@ struct UnitGrid{
     int len;
     int val;
 };
+//稀疏矩阵处理办法、分块压缩等方法
 class Matrix{
     /*
         Base structure of something like 2d matrix
