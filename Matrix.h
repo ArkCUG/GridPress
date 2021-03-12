@@ -8,6 +8,7 @@ using namespace std;
 struct UnitGrid{
     int x;
     int y;
+    int len;
     int val;
 };
 class Matrix{
@@ -28,5 +29,27 @@ public:
                 col=matrix[0].size();
         }
     }
+    void blockEncode();
+    void blockDecode();
 };
+
+void Matrix::blockEncode(){
+    vector<vector<bool>>signs(matrix.size(),vector<bool>(matrix[0].size(),false));
+}
+void Matrix::blockDecode(){
+    int length=0;
+    for(vector<UnitGrid>::iterator it=looseMatrix.begin();it!=looseMatrix.end();it++){
+        length=max(length,(*it).len+(*it).x);
+        length=max(length,(*it).len+(*it).y);
+    }
+    vector<vector<int>>origin(length,vector<int>(length,0));
+    matrix=origin;
+    for(vector<UnitGrid>::iterator it=looseMatrix.begin();it!=looseMatrix.end();it++){
+        for(int i=(*it).x;i<(*it).len+(*it).x;i++){
+            for(int j=(*it).y;j<(*it).y+(*it).len;j++){
+                matrix[i][j]=(*it).val;
+            }
+        }
+    }
+}
 #endif
