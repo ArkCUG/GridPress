@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 using namespace std;
 
 struct UnitGrid{
@@ -21,6 +22,7 @@ private:
     int row=0;
     int col=0;
     vector<UnitGrid> looseMatrix;
+    map<int,vector<pair<int,int>>>hash;
 public:
     Matrix(vector<vector<int>> datasrc){
         matrix=datasrc;
@@ -39,6 +41,20 @@ public:
 
 void Matrix::blockEncode(){
     vector<vector<bool>>signs(matrix.size(),vector<bool>(matrix[0].size(),false));
+    for(int i=0;i<signs.size();i++){
+        for(int j=0;j<signs.size();j++){
+            if(hash.find(matrix[i][j])==hash.end()){
+                pair<int,vector<pair<int,int>>>in;
+                in.first=matrix[i][j];
+                pair<int,int>coord(i,j);
+                in.second.push_back(coord);
+                hash.insert(in);
+            }else{
+                pair<int,int>coord(i,j);
+                hash[matrix[i][j]].push_back(coord);
+            }
+        }
+    }
 }
 void Matrix::blockDecode(){
     int length=0;
