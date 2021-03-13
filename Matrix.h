@@ -41,8 +41,8 @@ public:
 
 void Matrix::blockEncode(){
     vector<vector<bool>>signs(matrix.size(),vector<bool>(matrix[0].size(),false));
-    for(int i=0;i<signs.size();i++){
-        for(int j=0;j<signs.size();j++){
+    for(int i=0;i<matrix.size();i++){
+        for(int j=0;j<matrix.size();j++){
             if(hash.find(matrix[i][j])==hash.end()){
                 pair<int,vector<pair<int,int>>>in;
                 in.first=matrix[i][j];
@@ -55,6 +55,7 @@ void Matrix::blockEncode(){
             }
         }
     }
+    cout<<hash.size()<<endl;
 }
 void Matrix::blockDecode(){
     int length=0;
