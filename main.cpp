@@ -13,8 +13,18 @@ int main(){
         return -1;
     }
     string s;
+    vector<vector<int>> dataset;
     while(getline(ifs,s)){
+        int i;
         cout<<s<<endl;
+        istringstream iss(s);
+        vector<int>tmp;
+        while(iss>>i){
+            cout<<i<<endl;
+            tmp.push_back(i);
+        }
+        dataset.push_back(tmp);
     }
+    cout<<dataset.size()<<dataset[0].size()<<endl;
     return 0;
 }
